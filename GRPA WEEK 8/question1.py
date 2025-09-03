@@ -1,9 +1,21 @@
 '''
 GRPA 1 - Parsing Inputs - GRADED
-Problem statement
-Implement the given functions where you have to read the input from the standard input 
+Problem statement:
+Implement the given function `get_freq` where you have to read the input from the standard input 
 with the input format given in the docstring of the function and return the output in the required type.
+
+Function Specification:
+get_freq(filename):
+    Extract frequency information from the file
+
+    Argument:
+    filename: string, path to file
+
+    Return:
+    result: dictionary; keys are strings, values are integers
 '''
+
+# Solution
 
 def get_freq(filename):
     """
