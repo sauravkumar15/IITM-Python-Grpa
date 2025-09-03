@@ -1,51 +1,40 @@
+'''
+GRPA 1 - Recursive List Reverse - GRADED
 
 Problem statement:
-Implement a Python class Calculator that stores two numbers and provides methods to perform
-addition, subtraction, multiplication, division, and remainder. Division and remainder must
-raise ZeroDivisionError when the second operand is zero, following common method/return
-conventions in Python exercises [13][14].
+Implement the given function `reverse` which takes a list and returns a new list 
+with the elements in reverse order using recursion.
 
 Function Specification:
-class Calculator(a, b):
-    Encapsulates two numeric values and exposes arithmetic methods.
+reverse(L):
+    A recursive function to reverse a list L.
 
-Arguments:
-    a: number (first operand)
-    b: number (second operand)
+    Arguments:
+    L: list; type of elements could be anything
 
-Methods:
-    add(self) -> number
-    subtract(self) -> number
-    multiply(self) -> number
-    divide(self) -> number  # raise ZeroDivisionError if b == 0
-    remainder(self) -> number  # raise ZeroDivisionError if b == 0
+    Return:
+    result: list
+'''
 
-Return:
-    Each method returns the computed numeric result or raises as specified; signatures and returns
-    follow standard function documentation patterns [15][16].
+# Solution
 
-# Solution 
+def reverse(L):
+    """
+    A recursive function to reverse a list L
 
-class Calculator:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
+    Arguments:
+    L: list; type of elements could be anything
 
-    def add(self):
-        return self.a + self.b  # straightforward return of result [14]
+    Return:
+    result: list
+    """
+    if len(L) == 0:
+        return []
+    else:
+        # Take last element + recursively reverse the rest
+        return [L[-1]] + reverse(L[:-1])
 
-    def multiply(self):
-        return self.a * self.b  # standard arithmetic method body [13]
 
-    def subtract(self):
-        return self.a - self.b  # consistent naming and return [17]
-
-    def divide(self):
-        if self.b == 0:
-            raise ZeroDivisionError("Cannot divide by zero")  # explicit guard [13]
-        return self.a / self.b
-
-    def remainder(self):
-        if self.b == 0:
-            raise ZeroDivisionError("Cannot divide by zero")  # same contract as divide [13]
-        return self.a % self.b
+# Example usage
+print(reverse([1, 2, 3, 4]))   # Output: [4, 3, 2, 1]
+print(reverse(['a', 'b', 'c'])) # Output: ['c', 'b', 'a']
