@@ -1,4 +1,4 @@
-GRPA 1 - Calculator Class - GRADED
+
 Problem statement:
 Implement a Python class Calculator that stores two numbers and provides methods to perform
 addition, subtraction, multiplication, division, and remainder. Division and remainder must
