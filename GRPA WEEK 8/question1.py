@@ -1,3 +1,10 @@
+'''
+GRPA 1 - Parsing Inputs - GRADED
+Problem statement
+Implement the given functions where you have to read the input from the standard input 
+with the input format given in the docstring of the function and return the output in the required type.
+'''
+
 def get_freq(filename):
     """
     Extract frequency information from the file
@@ -9,11 +16,11 @@ def get_freq(filename):
     result: dictionary; keys are strings, values are integers
     """
     try:
-        f = open(filename, 'r')
+        with open(filename, 'r') as f:
+            words = f.readlines()
     except Exception as e:
-        return
+        return None
 
-    words = f.readlines()
     d = {}
     for word in words:
         s_word = word.strip()
