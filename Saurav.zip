@@ -1,0 +1,73 @@
+id,name,age,city
+1,Alice,22,Chennai
+2,Bob,24,Delhi
+3,Charlie,23,Mumbai
+4,David,25,Bangalore
+5,Eve,22,Hyderabad
+from flask import Flask, render_template, request
+import pandas as pd
+
+app = Flask(__name__)
+
+# Load CSV
+data = pd.read_csv("data.csv")
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/search", methods=["POST"])
+def search():
+    query = request.form.get("query")
+    # Filter rows where 'name' contains the query (case-insensitive)
+    result = data[data['name'].str.contains(query, case=False)]
+    return render_template("result.html", query=query, result=result.to_dict(orient="records"))
+
+if __name__ == "__main__":
+    app.run(debug=True)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Search User</h1>
+    <form action="{{ url_for('search') }}" method="post">
+        <input type="text" name="query" placeholder="Enter name..." required>
+        <button type="submit">Search</button>
+    </form>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Results for "{{ query }}"</h1>
+    {% if result %}
+        <ul>
+            {% for row in result %}
+                <li>ID: {{ row['id'] }}, Name: {{ row['name'] }}, Age: {{ row['age'] }}, City: {{ row['city'] }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+    <a href="{{ url_for('index') }}">Go Back</a>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 50px;
+}
+input, button {
+    padding: 10px;
+    margin: 5px;
+}
+console.log("Flask app loaded");
